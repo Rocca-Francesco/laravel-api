@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.guest')
 @section('content')
     <div class="container text-center">
         <h2 class="text-danger">Benvenuto!</h2>

@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [GuestController::class, 'index']);
 
-Route::get('/dashboard', [AdminController::class, 'index'])->middleware('auth')->name('dashboard');
+Route::get('/home', [AdminController::class, 'index'])->middleware('auth')->name('home');
 
 Route::middleware('auth')
     ->prefix('/profile')
