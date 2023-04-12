@@ -2,6 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Models\Project;
+use Illuminate\Support\Str;
+use Faker\Generator as Faker;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -12,8 +15,16 @@ class ProjectSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(Faker $faker)
     {
-        //
+        for ($i=0; $i < 50; $i++) { 
+
+            $newProject = new Project;
+            $newProject->title = $faker->sentence(3);
+            $newProject->lenguages = $faker->sentence(3);
+            $newProject->slug = Str::of($newProject->title)->slug('-');
+            $newProject->link = $faker->imageUrl(360, 360, 'animals', true, 'cats');
+            $newProject->save();
+        }
     }
 }
