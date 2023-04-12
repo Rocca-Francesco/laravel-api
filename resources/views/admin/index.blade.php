@@ -3,7 +3,7 @@
 @section('content')
     
 <div class="container">
-    <h2 class="fs-4 text-secondary my-4">
+    <h2 class="fs-4 text-secondary mt-4">
         {{ __('Projects List') }}
     </h2>
     <div class="row justify-content-center">
@@ -14,12 +14,16 @@
 								<h5 class="card-title">{{$project->title}}</h5>
 								<p class="card-text">Programming Lenguages used: {{$project->lenguages}} </p>
                 <a href="{{route('admin.projects.show', $project)}}" class="btn btn-primary my-2">Go to detail about project</a>
-								<a href="{{$project->link}}" class="btn btn-primary">Go somewhere</a>
+								<a href="{{$project->link}}" class="btn btn-primary">Go to project</a>
 							</div>
 						</div>
 					</div>
 			@endforeach
-    </div>
-</div>
 
+    </div>
+		<div class="my-2">
+			{{$projects->links()}}
+		</div>
+	</div>
+	
 @endsection
