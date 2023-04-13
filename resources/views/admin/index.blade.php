@@ -17,6 +17,7 @@
 								<h5 class="card-title">{{$project->title}}</h5>
 								<p class="card-text">Programming Lenguages used: {{$project->lenguages}} </p>
                 <a href="{{route('admin.projects.show', $project)}}" class="btn btn-primary my-2">Go to detail about project</a>
+								<a href="{{route('admin.projects.edit', $project)}}" class="btn btn-primary my-2">Change project info</a>
 								<a href="{{$project->link}}" class="btn btn-primary">Go to project</a>
 							</div>
 						</div>
