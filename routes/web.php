@@ -26,7 +26,7 @@ Route::middleware('auth')
 ->name('admin.')
 ->group(function() {
     Route::resource('projects', ProjectController::class);
-        // ->parameters(['projects' => 'projects:slug']);
+        // ->parameters(['projects' => 'project:slug']);
 });
 
 Route::middleware('auth')

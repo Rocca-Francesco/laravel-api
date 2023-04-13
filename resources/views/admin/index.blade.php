@@ -3,9 +3,12 @@
 @section('content')
     
 <div class="container">
-    <h2 class="fs-4 text-secondary mt-4">
+    <div class="d-flex justify-content-between align-items-center">
+			<h2 class="fs-4 text-secondary mt-4">
         {{ __('Projects List') }}
-    </h2>
+    	</h2>
+			<a href="{{route('admin.projects.create')}}" class="btn btn-primary mt-4">Create new project</a>
+		</div>
     <div class="row justify-content-center">
 			@foreach ($projects as $project)
         <div class="col g-4">
