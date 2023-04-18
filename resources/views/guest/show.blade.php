@@ -12,7 +12,7 @@
 							<div class="card-body">
 								<h5 class="card-title">{{$project->title}}</h5>
 								<p class="card-text">Programming Lenguages used: {{$project->lenguages}} </p>
-								<a href="{{$project->link}}" class="btn btn-primary">Go somewhere</a>
+								<a href="{{$project->link}}" class="btn btn-primary">Go to project link</a>
 							</div>
 						</div>
 				</div>

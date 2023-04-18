@@ -37,7 +37,7 @@
 								<form action="{{route('admin.projects.destroy', $project)}}" method="POST" class="d-inline-block">
 									@method('delete')
 									@csrf
-									<button type="submit" class="btn btn-danger my-2" data-bs-toggle="modal" data-bs-target="#destroyModal-{{$project->title}}">
+									<button type="submit" class="btn btn-danger my-2" data-bs-toggle="modal" data-bs-target="#destroyModal-{{$project->id}}">
 									<i class="bi bi-trash3"></i>
 									</button>
 								</form>
@@ -57,7 +57,7 @@
 
 @section('modals')
 	@foreach ($projects as $project)
-	<div class="modal fade" id="destroyModal-{{$project->title}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal fade" id="destroyModal-{{$project->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">

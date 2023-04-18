@@ -23,7 +23,7 @@ class ProjectSeeder extends Seeder
             $newProject->title = $faker->sentence(3);
             $newProject->lenguages = $faker->sentence(3);
             $newProject->slug = Str::of($newProject->title)->slug('-');
-            $newProject->link = $faker->imageUrl(360, 360, 'animals', true, 'cats');
+            $newProject->link = 'https://i.pinimg.com/originals/93/9b/c7/939bc77d9e021e46690caf42521c5499.jpg';
             $newProject->save();
         }
     }

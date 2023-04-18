@@ -64,10 +64,6 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {   
-        $project->fill();
-        $project->slug = Project::generateSlug($project->title);
-        $project->save();
-
         return view('admin.edit', compact('project'));
     }
 

@@ -3,9 +3,14 @@
 @section('content')
 
 <div class="container">
-  <h2 class="fs-4 text-secondary mt-4">
-    {{ __('Edit Project') }}
-  </h2>
+  <div class="d-flex justify-content-between align-items-center mt-4">
+    <h2 class="fs-4 text-secondary">
+    Edit Project {{$project->title}}
+    </h2>
+    <div>
+      <a href="{{route('admin.projects.index')}}" class="btn btn-primary">Torna alla lista</a>
+    </div>
+  </div>
 
   <form action="{{route('admin.projects.update', $project)}}" method="POST">
     <div class="mb-3">
