@@ -20,6 +20,7 @@
 		</div>
     <div class="row justify-content-center">
         <div class="col">
+						
 						<div class="card">
 							<div class="card-body">
 								<h5 class="card-title">{{$project->title}}</h5>

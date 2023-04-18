@@ -26,8 +26,15 @@
 
 
         @include('layouts.navbar')
-
+        
         <main class="">
+
+            @if (session('message'))
+				<div class="alert alert-{{session('message_error') ? session('message_error') : 'success'}}">
+					{{session('message')}}
+				</div>
+			@endif
+
             @yield('content')
         </main>
     </div>
