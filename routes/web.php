@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [GuestController::class, 'index']);
+Route::get('/guest/{project}', [GuestController::class, 'show'])->name('guest.show');
 
 Route::get('/home', [AdminController::class, 'index'])->middleware('auth')->name('home');
 

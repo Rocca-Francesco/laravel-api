@@ -15,7 +15,7 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        $projects = project::paginate(10);
+        $projects = project::orderBy('updated_at', 'DESC')->paginate(8);
         return view('admin.index', compact('projects'));
     }
 
@@ -63,7 +63,11 @@ class ProjectController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit(Project $project)
-    {
+    {   
+        $project->fill();
+        $project->slug = Project::generateSlug($project->title);
+        $project->save();
+
         return view('admin.edit', compact('project'));
     }
 
@@ -92,6 +96,7 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
-        //
+        $project->delete();
+        return to_route('admin.index');
     }
 }
