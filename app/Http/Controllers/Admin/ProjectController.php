@@ -42,7 +42,7 @@ class ProjectController extends Controller
         $project->slug = Project::generateSlug($project->title);
         $project->save();
 
-        return to_route('admin.show', compact('project'));
+        return to_route('admin.projects.show', compact('project'));
     }
 
     /**
@@ -81,7 +81,7 @@ class ProjectController extends Controller
         $project->slug = Project::generateSlug($project->title);
         $project->save();
 
-        return to_route('admin.show', compact('project'));
+        return to_route('admin.projects.show', compact('project'));
     }
 
     /**
@@ -93,6 +93,6 @@ class ProjectController extends Controller
     public function destroy(Project $project)
     {
         $project->delete();
-        return to_route('admin.index');
+        return to_route('admin.projects.index');
     }
 }

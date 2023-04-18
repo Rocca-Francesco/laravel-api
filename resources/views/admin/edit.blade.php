@@ -1,5 +1,10 @@
 @extends('layouts.app')
 
+@section('cdns')
+{{-- bootstrap icons --}}
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css">
+@endsection
+
 @section('content')
 
 <div class="container">
@@ -9,6 +14,8 @@
     </h2>
     <div>
       <a href="{{route('admin.projects.index')}}" class="btn btn-primary">Torna alla lista</a>
+      <a href="{{route('admin.projects.show', $project)}}" class="btn btn-primary my-2"><i class="bi bi-eye"></i></a>
+      <button type="submit" class="btn btn-danger my-2" data-bs-toggle="modal" data-bs-target="#destroyModal-{{$project->id}}"><i class="bi bi-trash3"></i></button>
     </div>
   </div>
 
@@ -35,4 +42,31 @@
   </form>
 </div>
 	
+@endsection
+
+@section('modals')
+	<div class="modal fade" id="destroyModal-{{$project->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h1 class="modal-title fs-5" id="exampleModalLabel">Vuoi eliminare {{$project->title}}? </h1>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					Vuoi eliminare il progetto? <br>
+					Questa operaione è irreversibile.
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+				<form action="{{route('admin.projects.destroy', $project)}}" method="POST">
+            @method('delete')
+            @csrf
+
+            <button type="submit" class="btn btn-danger">Delete</button>
+
+        </form>
+				</div>
+			</div>
+		</div>
+	</div>
 @endsection

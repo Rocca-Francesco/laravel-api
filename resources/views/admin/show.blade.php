@@ -15,13 +15,7 @@
 			<div>
 				<a href="{{route('admin.projects.index')}}" class="btn btn-primary">Torna alla lista</a>
 				<a href="{{route('admin.projects.edit', $project)}}" class="btn btn-primary my-2"><i class="bi bi-pencil-square"></i></a>
-				<form action="{{route('admin.projects.destroy', $project)}}" method="POST" class="d-inline-block">
-					@method('delete')
-					@csrf
-					<button type="submit" class="btn btn-danger my-2" data-bs-toggle="modal" data-bs-target="#destroyModal-{{$project->title}}">
-						<i class="bi bi-trash3"></i>
-					</button>
-				</form>
+				<button type="submit" class="btn btn-danger my-2" data-bs-toggle="modal" data-bs-target="#destroyModal-{{$project->id}}"><i class="bi bi-trash3"></i></button>	
 			</div>
 		</div>
     <div class="row justify-content-center">
@@ -40,7 +34,7 @@
 @endsection
 
 @section('modals')
-	<div class="modal fade" id="destroyModal-{{$project->title}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal fade" id="destroyModal-{{$project->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -53,9 +47,16 @@
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-					<button type="button" class="btn btn-danger">Delete</button>
+				<form action="{{route('admin.projects.destroy', $project)}}" method="POST">
+            @method('delete')
+            @csrf
+
+            <button type="submit" class="btn btn-danger">Delete</button>
+
+        </form>
 				</div>
 			</div>
 		</div>
 	</div>
 @endsection
+

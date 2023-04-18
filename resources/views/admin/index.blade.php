@@ -34,13 +34,7 @@
 								<a href="{{route('admin.projects.show', $project)}}" class="btn btn-primary my-2"><i class="bi bi-eye"></i></a>
 								<a href="{{route('admin.projects.edit', $project)}}" class="btn btn-primary my-2"><i class="bi bi-pencil-square"></i></a>
 								<a href="{{$project->link}}" class="btn btn-primary"><i class="bi bi-link-45deg"></i></a>
-								<form action="{{route('admin.projects.destroy', $project)}}" method="POST" class="d-inline-block">
-									@method('delete')
-									@csrf
-									<button type="submit" class="btn btn-danger my-2" data-bs-toggle="modal" data-bs-target="#destroyModal-{{$project->id}}">
-									<i class="bi bi-trash3"></i>
-									</button>
-								</form>
+								<button type="submit" class="btn btn-danger my-2" data-bs-toggle="modal" data-bs-target="#destroyModal-{{$project->id}}"><i class="bi bi-trash3"></i></button>	
 							</td>
 						</tr>
 						@endforeach
@@ -70,7 +64,13 @@
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-					<button type="button" class="btn btn-danger">Delete</button>
+				<form action="{{route('admin.projects.destroy', $project)}}" method="POST">
+            @method('delete')
+            @csrf
+
+            <button type="submit" class="btn btn-danger">Delete</button>
+
+        </form>
 				</div>
 			</div>
 		</div>
