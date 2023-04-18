@@ -17,6 +17,8 @@
 
     <!-- Usando Vite -->
     @vite(['resources/js/app.js'])
+
+    @yield('cdns')
 </head>
 
 <body>

@@ -1,5 +1,10 @@
 @extends('layouts.app')
 
+@section('cdns')
+{{-- bootstrap icons --}}
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css">
+@endsection
+
 @section('content')
     
 <div class="container">
@@ -10,26 +15,37 @@
 			<a href="{{route('admin.projects.create')}}" class="btn btn-primary mt-4">Create new project</a>
 		</div>
     <div class="row justify-content-center">
-			@foreach ($projects as $project)
-        <div class="col g-4">
-					<div class="card" style="width: 18rem;">
-							<div class="card-body">
-								<h5 class="card-title">{{$project->title}}</h5>
-								<p class="card-text">Programming Lenguages used: {{$project->lenguages}} </p>
-                <a href="{{route('admin.projects.show', $project)}}" class="btn btn-primary my-2">Go to detail about project</a>
-								<a href="{{route('admin.projects.edit', $project)}}" class="btn btn-primary my-2">Change project info</a>
-								<a href="{{$project->link}}" class="btn btn-primary">Go to project</a>
-								<form action="{{route('admin.projects.destroy', $project)}}" method="POST">
+			<table class="table">
+				<thead>
+					<tr>
+						<th scope="col">ID</th>
+						<th scope="col">title</th>
+						<th scope="col">lenguages</th>
+						<th scope="col">actions</th>
+					</tr>
+				</thead>
+				<tbody>
+						@foreach ($projects as $project)
+						<tr>
+							<th scope="row">{{$project->id}}</th>
+							<td>{{$project->title}}</td>
+							<td>{{$project->lenguages}}</td>
+							<td>
+								<a href="{{route('admin.projects.show', $project)}}" class="btn btn-primary my-2"><i class="bi bi-eye"></i></a>
+								<a href="{{route('admin.projects.edit', $project)}}" class="btn btn-primary my-2"><i class="bi bi-pencil-square"></i></a>
+								<a href="{{$project->link}}" class="btn btn-primary"><i class="bi bi-link-45deg"></i></a>
+								<form action="{{route('admin.projects.destroy', $project)}}" method="POST" class="d-inline-block">
 									@method('delete')
 									@csrf
 									<button type="submit" class="btn btn-danger my-2" data-bs-toggle="modal" data-bs-target="#destroyModal-{{$project->title}}">
-									Destroy Project
+									<i class="bi bi-trash3"></i>
 									</button>
 								</form>
-							</div>
-						</div>
-					</div>
-			@endforeach
+							</td>
+						</tr>
+						@endforeach
+					</tbody>
+				</table>
 
     </div>
 		<div class="my-2">
