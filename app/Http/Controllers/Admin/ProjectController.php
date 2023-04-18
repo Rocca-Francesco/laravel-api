@@ -11,12 +11,16 @@ class ProjectController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $projects = project::orderBy('updated_at', 'DESC')->paginate(8);
-        return view('admin.index', compact('projects'));
+        $sort = (!empty($sort_request = $request->get('sort'))) ? $sort_request : "updated_at";
+        $order = (!empty($order_request = $request->get('order'))) ? $order_request : "DESC";
+
+        $projects = project::orderBy($sort, $order)->paginate(8)->withQueryString();
+        return view('admin.index', compact('projects', 'sort', 'order'));
     }
 
     /**

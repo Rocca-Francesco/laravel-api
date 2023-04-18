@@ -15,12 +15,27 @@
 			<a href="{{route('admin.projects.create')}}" class="btn btn-primary mt-4">Create new project</a>
 		</div>
     <div class="row justify-content-center">
-			<table class="table">
+			<table class="table  table-striped">
 				<thead>
 					<tr>
-						<th scope="col">ID</th>
-						<th scope="col">title</th>
-						<th scope="col">lenguages</th>
+						<th scope="col"><a href="{{ route('admin.projects.index') }}?sort=id&order=@if ($sort == 'id' && $order != 'DESC') DESC @else ASC @endif ">
+							ID
+							@if($sort == 'id')
+								<i class="bi bi-caret-up-fill d-inline-block @if ($order == 'DESC') rotation @endif "></i>
+							@endif
+						</a></th>
+						<th scope="col"><a href="{{ route('admin.projects.index') }}?sort=title&order=@if ($sort == 'title' && $order != 'DESC') DESC @else ASC @endif ">
+							TITOLI
+							@if($sort == 'title')
+								<i class="bi bi-caret-up-fill d-inline-block @if ($order == 'DESC') rotation @endif "></i>
+							@endif
+						</a></th>
+						<th scope="col"><a href="{{ route('admin.projects.index') }}?sort=lenguages @if ($sort == 'lenguages' && $order != 'DESC') DESC @else ASC @endif ">
+							LINGUAGGI
+							@if($sort == 'lenguages')
+								<i class="bi bi-caret-up-fill d-inline-block @if ($order == 'DESC') rotation @endif "></i>
+							@endif
+						</a></th>
 						<th scope="col">actions</th>
 					</tr>
 				</thead>
