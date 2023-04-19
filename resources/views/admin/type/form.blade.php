@@ -8,45 +8,33 @@
 @section('content')
 
 <div class="container">
-    @if($project->id)
+    @if($type->id)
     <div class="d-flex justify-content-between align-items-center mt-4">
       <h2 class="fs-4 text-secondary">
-        Edit Project {{$project->title}}
+        Edit Project {{$type->title}}
       </h2>
       <div>
-        <a href="{{route('admin.projects.index')}}" class="btn btn-primary">Torna alla lista</a>
-        <a href="{{route('admin.projects.show', $project)}}" class="btn btn-primary my-2"><i class="bi bi-eye"></i></a>
-        <button type="submit" class="btn btn-danger my-2" data-bs-toggle="modal" data-bs-target="#destroyModal-{{$project->id}}"><i class="bi bi-trash3"></i></button>
+        <a href="{{route('admin.type.index')}}" class="btn btn-primary">Torna alla lista</a>
+        <button type="submit" class="btn btn-danger my-2" data-bs-toggle="modal" data-bs-target="#destroyModal-{{$type->id}}"><i class="bi bi-trash3"></i></button>
       </div>
     </div>
     @else
     <h2 class="fs-4 text-secondary">
-    Create new project
+    Create new type
     </h2>
     @endif
 
-  @if($project->id)
-    <form action="{{route('admin.projects.update', $project)}}" method="POST" enctype="multipart/form-data">
+  @if($type->id)
+    <form action="{{route('admin.type.update', $type)}}" method="POST" enctype="multipart/form-data">
     @method('PUT')
   @else
-    <form action="{{route('admin.projects.store')}}" method="POST" enctype="multipart/form-data">
+    <form action="{{route('admin.type.store')}}" method="POST" enctype="multipart/form-data">
   @endif
   @csrf
-
-    <div class="mb-3">
-      <label for="title" class="form-label">Project Title</label>
-      <input type="text" class="form-control @error('title') is-invalid @enderror" id="title" name="title" value="{{old('title', $project->title)}}">
-      @error('title')
-      <div class="invalid-feedback">
-        {{ $message }}
-      </div>
-      @enderror
-    </div>
-
     <div class="row">
       <div class="col-6 mb-3">
-        <label for="lenguages" class="form-label">Types of lenguages</label>
-        <input type="text" class="form-control @error('lenguages') is-invalid @enderror" id="lenguages" name="lenguages" value="{{old('lenguages', $project->lenguages)}}">
+        <label for="title" class="form-label">Type Title</label>
+        <input type="text" class="form-control @error('title') is-invalid @enderror" id="title" name="title" value="{{old('title', $type->title)}}">
         @error('title')
         <div class="invalid-feedback">
           {{ $message }}
@@ -54,48 +42,17 @@
         @enderror
       </div>
       <div class="col-6 mb-3">
-        <label for="type_id" class="form-label">Types of lenguages</label>
-        <select class="form-select" name="type_id" id="type_id">
-          <option value="">Nessun tipo</option>
-          @foreach ($types as $type)
-            <option @if (old('type_id', $project->type_id) == $type->id) @endif value="{{$type->id}}">{{$type->title}}</option>
-          @endforeach
-        </select>
-      </div>
-      <div class="col-3 mb-3">
-        <label for="link" class="form-label">Image of the project</label>
-        <input type="file" class="form-control @error('link') is-invalid @enderror" id="link" name="link">
-        @error('link')
+        <label for="color" class="form-label">Color</label>
+        <input type="text" class="form-control @error('color') is-invalid @enderror" id="color" name="color" value="{{old('color', $type->color)}}">
+        @error('color')
         <div class="invalid-feedback">
           {{ $message }}
         </div>
         @enderror
-      </div>
-      <div class="col-2">
-        <img src="{{old('link', $project->getLinkUrl())}}" class="img-fluid" alt="" id="linkPreview">
       </div>
     </div>
     <input type="submit" class="btn btn-success" value="Save">
   </form>
 </div>
 	
-@endsection
-
-@section('scripts')
-	
-  <script>
-    linkEl = document.getElementById('link');
-    linkPreviewEl = document.getElementById('linkPreview');
-
-    linkEl.addEventListener('change', () =>{
-      if(linkEl.files && linkEl.files[0]) {
-        const reader = new FileReader();
-        reader.readAsDataURl(linkEl.files[0]);
-        reader.onload = e => {
-          linkPreviewEl.src = e.target.result;
-        }
-      }
-    })
-  </script>
-
 @endsection

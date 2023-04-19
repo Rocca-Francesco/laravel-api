@@ -42,13 +42,12 @@ class TypeController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title' => 'required|string|unique|max:50',
+            'title' => 'required|string|max:50',
             'color' => 'required|string|size:7'
         ],
         [
             'title.required' => 'Il titolo è obbligatorio',
             'title.string' => 'Il titolo deve essere una stringa',
-            'title.unique' => 'Il titolo deve essere unico',
             'title.max' => 'Il titolo può essere al massimo 50 caratteri',
 
             'color.required' => 'Il colore è obbligatorio',
@@ -96,13 +95,12 @@ class TypeController extends Controller
     public function update(Request $request, Type $type)
     {
         $request->validate([
-            'title' => 'required|string|unique|max:50',
+            'title' => 'required|string|max:50',
             'color' => 'required|string|size:7'
         ],
         [
             'title.required' => 'Il titolo è obbligatorio',
             'title.string' => 'Il titolo deve essere una stringa',
-            'title.unique' => 'Il titolo deve essere unico',
             'title.max' => 'Il titolo può essere al massimo 50 caratteri',
 
             'color.required' => 'Il colore è obbligatorio',
