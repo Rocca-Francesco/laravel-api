@@ -47,7 +47,7 @@
 						<tr>
 							<th scope="row">{{$project->id}}</th>
 							<td>{{$project->title}}</td>
-							<td>{{$project->type?->title}}</td>
+							<td><span class="badge rounded-pill" style="background-color: {{$project->type?->color}}">{{$project->type?->title}}</span></td>
 							<td>{{$project->lenguages}}</td>
 							<td>
 								<a href="{{route('admin.projects.show', $project)}}" class="btn btn-primary my-2"><i class="bi bi-eye"></i></a>
