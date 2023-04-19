@@ -43,7 +43,7 @@
       </div>
       <div class="col-6 mb-3">
         <label for="color" class="form-label">Color</label>
-        <input type="text" class="form-control @error('color') is-invalid @enderror" id="color" name="color" value="{{old('color', $type->color)}}">
+        <input type="color" class="form-control @error('color') is-invalid @enderror" id="color" name="color" value="{{old('color', $type->color)}}">
         @error('color')
         <div class="invalid-feedback">
           {{ $message }}
