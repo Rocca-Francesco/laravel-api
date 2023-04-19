@@ -8,8 +8,12 @@ use Illuminate\Support\Str;
 
 class Project extends Model
 {   
-    protected $fillable = ['title', 'lenguages', 'link'];
     use HasFactory;
+    protected $fillable = ['title', 'lenguages', 'link'];
+
+    public function type() {
+        return $this->belongsTo(Type::class);
+    }
 
     public static function generateSlug($title) {
         $possible_slug = Str::of($title)->slug('-');
