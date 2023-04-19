@@ -20,10 +20,10 @@
   </div>
 
   <form action="{{route('admin.projects.update', $project)}}" method="POST">
+    @method('PUT')
+    @csrf
+    
     <div class="mb-3">
-      @method('PUT')
-      @csrf
-
       <label for="title" class="form-label">Project Title</label>
       <input type="text" class="form-control" id="title" name="title" value="{{ $project->title }}">
     </div>
