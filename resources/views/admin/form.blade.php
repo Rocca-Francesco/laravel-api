@@ -63,11 +63,30 @@
         @enderror
       </div>
       <div class="col-2">
-        <img src="{{old('link', $project->getLinkUrl())}}" class="img-fluid" alt="">
+        <img src="{{old('link', $project->getLinkUrl())}}" class="img-fluid" alt="" id="linkPreview">
       </div>
     </div>
     <input type="submit" class="btn btn-success" value="Save">
   </form>
 </div>
 	
+@endsection
+
+@section('scripts')
+	
+  <script>
+    linkEl = document.getElementById('link');
+    linkPreviewEl = document.getElementById('linkPreview');
+
+    linkEl.addEventListener('change', () =>{
+      if(linkEl.files && linkEl.files[0]) {
+        const reader = new FileReader();
+        reader.readAsDataURl(linkEl.files[0]);
+        reader.onload = e => {
+          linkPreviewEl.src = e.target.result;
+        }
+      }
+    })
+  </script>
+
 @endsection
