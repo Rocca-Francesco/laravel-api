@@ -63,8 +63,12 @@ class ProjectController extends Controller
         ]);
 
         $data = $request->all();
-        $img_path = Storage::put('uploads/projects', $data['link']);
-        $data['link'] = $img_path;
+
+        if(Arr::exists($data, 'link')) {
+            $img_path = Storage::put('uploads/projects', $data['link']);
+            $data['link'] = $img_path;
+        }
+
         $project = new Project;
         $project->fill($data);
         $project->slug = Project::generateSlug($project->title);
@@ -124,7 +128,15 @@ class ProjectController extends Controller
             'link.mimes' => 'Il tipo d\'immagine deve essere jpg, png o jpeg',
         ]);
         
-        $project->fill($request->all());
+        $data = $request->all();
+
+        if(Arr::exists($data, 'link')) {
+            if($project->link) Storage::delete($project->link);
+            $img_path = Storage::put('uploads/projects', $data['link']);
+            $data['link'] = $img_path;
+        }
+
+        $project->fill($data);
         $project->slug = Project::generateSlug($project->title);
         $project->save();
 
@@ -140,7 +152,9 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
+        if($project->link) Storage::delete($project->link);
         $project->delete();
+        
         return to_route('admin.projects.index')
             ->with('message_error', 'danger')
             ->with('message', 'Progetto eliminato corretamente!');

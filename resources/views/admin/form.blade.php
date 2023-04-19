@@ -63,7 +63,7 @@
         @enderror
       </div>
       <div class="col-2">
-        <img src="{{old('link', $project->link)}}" class="img-fluid" alt="">
+        <img src="{{old('link', $project->getLinkUrl())}}" class="img-fluid" alt="">
       </div>
     </div>
     <input type="submit" class="btn btn-success" value="Save">
