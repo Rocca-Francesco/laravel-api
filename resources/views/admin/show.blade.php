@@ -23,6 +23,7 @@
 						
 						<div class="card">
 							<div class="card-body">
+								<img class="imgCards" src="{{asset('storage/' . $project->link )}}" alt="">
 								<h5 class="card-title">{{$project->title}}</h5>
 								<p class="card-text">Programming Lenguages used: {{$project->lenguages}} </p>
 								<a href="{{$project->link}}" class="btn btn-primary">Go to project link</a>

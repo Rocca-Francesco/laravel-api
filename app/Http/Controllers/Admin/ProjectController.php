@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Project;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\Controller;
 
 class ProjectController extends Controller
@@ -45,7 +46,7 @@ class ProjectController extends Controller
         $request->validate([
             'title' => 'required|string|max:50',
             'lenguages' => 'required|string|max:100',
-            'link' => 'required|url|max:100',
+            'link' => 'nullable|image|mimes:jpg.png,jpeg',
         ], 
         [
             'title.required' => 'Il titolo è obbligatorio',
@@ -56,13 +57,16 @@ class ProjectController extends Controller
             'lenguages.string' => 'I linguaggi devono essere una stringa',
             'lenguages.max' => 'I linguaggi devono avare al massimo 100 caratteri',
 
-            'link.required' => 'Il link al progetto è obbligatorio',
-            'link.url' => 'Il link deve essere un url',
-            'link.max' => 'Il link deve avere al massimo 100 caratteri',
+            
+            'link.url' => 'Il file deve essere un\'immagine',
+            'link.mimes' => 'Il tipo d\'immagine deve essere jpg, png o jpeg',
         ]);
 
+        $data = $request->all();
+        $img_path = Storage::put('uploads/projects', $data['link']);
+        $data['link'] = $img_path;
         $project = new Project;
-        $project->fill($request->all());
+        $project->fill($data);
         $project->slug = Project::generateSlug($project->title);
         $project->save();
 
@@ -104,7 +108,7 @@ class ProjectController extends Controller
         $request->validate([
             'title' => 'required|string|max:50',
             'lenguages' => 'required|string|max:100',
-            'link' => 'required|url|max:100',
+            'link' => 'nullable|image|mimes:jpg.png,jpeg',
         ], 
         [
             'title.required' => 'Il titolo è obbligatorio',
@@ -115,9 +119,9 @@ class ProjectController extends Controller
             'lenguages.string' => 'I linguaggi devono essere una stringa',
             'lenguages.max' => 'I linguaggi devono avare al massimo 100 caratteri',
 
-            'link.required' => 'Il link al progetto è obbligatorio',
-            'link.url' => 'Il link deve essere un url',
-            'link.max' => 'Il link deve avere al massimo 100 caratteri',
+            
+            'link.url' => 'Il file deve essere un\'immagine',
+            'link.mimes' => 'Il tipo d\'immagine deve essere jpg, png o jpeg',
         ]);
         
         $project->fill($request->all());

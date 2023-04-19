@@ -26,10 +26,10 @@
     @endif
 
   @if($project->id)
-    <form action="{{route('admin.projects.update', $project)}}" method="POST">
+    <form action="{{route('admin.projects.update', $project)}}" method="POST" enctype="multipart/form-data">
     @method('PUT')
   @else
-    <form action="{{route('admin.projects.store')}}" method="POST">
+    <form action="{{route('admin.projects.store')}}" method="POST" enctype="multipart/form-data">
   @endif
   @csrf
 
@@ -54,9 +54,9 @@
         @enderror
       </div>
       <div class="col-3 mb-3">
-        <label for="link" class="form-label">Link to the project</label>
-        <input type="url" class="form-control @error('lenguages') is-invalid @enderror" id="link" name="link" value="{{old('link', $project->link)}}">
-        @error('title')
+        <label for="link" class="form-label">Image of the project</label>
+        <input type="file" class="form-control @error('link') is-invalid @enderror" id="link" name="link">
+        @error('link')
         <div class="invalid-feedback">
           {{ $message }}
         </div>
