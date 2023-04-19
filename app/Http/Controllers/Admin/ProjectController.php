@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Project;
+use App\Models\Type;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Storage;
@@ -33,7 +34,8 @@ class ProjectController extends Controller
     public function create()
     {   
         $project = new Project;
-        return view('admin.form', compact('project'));
+        $types = Type::orderBy('title')->get();
+        return view('admin.form', compact('project', 'types'));
     }
 
     /**
@@ -48,6 +50,7 @@ class ProjectController extends Controller
             'title' => 'required|string|max:50',
             'lenguages' => 'required|string|max:100',
             'link' => 'nullable|image|mimes:jpg.png,jpeg',
+            'type_id' => 'nullable|exists:types,id',
         ], 
         [
             'title.required' => 'Il titolo è obbligatorio',
@@ -61,6 +64,8 @@ class ProjectController extends Controller
             
             'link.url' => 'Il file deve essere un\'immagine',
             'link.mimes' => 'Il tipo d\'immagine deve essere jpg, png o jpeg',
+
+            'type_id' => 'La tipologia deve essere tra i campi disponibili',
         ]);
 
         $data = $request->all();
@@ -98,7 +103,8 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {   
-        return view('admin.form', compact('project'));
+        $types = Type::orderBy('title')->get();
+        return view('admin.form', compact('project', 'types'));
     }
 
     /**
@@ -114,6 +120,7 @@ class ProjectController extends Controller
             'title' => 'required|string|max:50',
             'lenguages' => 'required|string|max:100',
             'link' => 'nullable|image|mimes:jpg.png,jpeg',
+            'type_id' => 'nullable|exists:types,id'
         ], 
         [
             'title.required' => 'Il titolo è obbligatorio',
@@ -124,9 +131,10 @@ class ProjectController extends Controller
             'lenguages.string' => 'I linguaggi devono essere una stringa',
             'lenguages.max' => 'I linguaggi devono avare al massimo 100 caratteri',
 
-            
             'link.url' => 'Il file deve essere un\'immagine',
             'link.mimes' => 'Il tipo d\'immagine deve essere jpg, png o jpeg',
+
+            'type_id' => 'La tipologia deve essere tra i campi disponibili',
         ]);
         
         $data = $request->all();

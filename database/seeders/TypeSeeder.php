@@ -1,7 +1,7 @@
 <?php
 
 namespace Database\Seeders;
-
+use App\Models\Type;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Faker\Generator as Faker;
@@ -17,7 +17,7 @@ class TypeSeeder extends Seeder
     {
         $titles = ['HTML', 'JAVASCRIPT', 'CSS', 'PHP', 'SQL'];
 
-        foreach ($title as $title) {
+        foreach ($titles as $title) {
             $type = new Type;
             $type->title = $title;
             $type->color = $faker->hexColor();

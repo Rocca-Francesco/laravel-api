@@ -53,6 +53,15 @@
         </div>
         @enderror
       </div>
+      <div class="col-6 mb-3">
+        <label for="type_id" class="form-label">Types of lenguages</label>
+        <select class="form-select" name="type_id" id="type_id">
+          <option value="">Nessun tipo</option>
+          @foreach ($types as $type)
+            <option @if (old('type_id', $project->type_id) == $type->id) @endif value="{{$type->id}}">{{$type->title}}</option>
+          @endforeach
+        </select>
+      </div>
       <div class="col-3 mb-3">
         <label for="link" class="form-label">Image of the project</label>
         <input type="file" class="form-control @error('link') is-invalid @enderror" id="link" name="link">
