@@ -18,8 +18,11 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('home') }}">{{ __('Home') }}</a>
                             </li>
-														<li class="nav-item">
+							<li class="nav-item">
                                 <a class="nav-link" href="{{ route('admin.projects.index') }}">{{ __('Projects') }}</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('admin.type.index') }}">{{ __('Types') }}</a>
                             </li>
 														{{-- <li class="nav-item">
                                 <a class="nav-link" href="{{ route('home') }}">{{ __('Home') }}</a>

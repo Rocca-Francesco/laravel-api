@@ -79,7 +79,7 @@
 				</div>
 				<div class="modal-body">
 					Vuoi eliminare il progetto? <br>
-					Questa operaione è irreversibile.
+					Questa operazione è irreversibile.
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
