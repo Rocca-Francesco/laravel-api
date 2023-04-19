@@ -29,11 +29,13 @@
         
         <main class="">
 
-            @if (session('message'))
+            <div class="container my-2">
+                @if (session('message'))
 				<div class="alert alert-{{session('message_error') ? session('message_error') : 'success'}}">
 					{{session('message')}}
 				</div>
-			@endif
+			    @endif
+            </div>
 
             @yield('content')
         </main>

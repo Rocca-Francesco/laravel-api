@@ -40,7 +40,26 @@ class ProjectController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    {   
+        $request->validate([
+            'title' => 'required|string|max:50',
+            'lenguages' => 'required|string|max:100',
+            'link' => 'required|url|max:100',
+        ], 
+        [
+            'title.required' => 'Il titolo è obbligatorio',
+            'title.string' => 'Il titolo deve essere una stringa',
+            'title.max' => 'Il titolo deve avare al massimo 50 caratteri',
+
+            'lenguages.required' => 'Il progetto deve avere almeno un linguaggio',
+            'lenguages.string' => 'I linguaggi devono essere una stringa',
+            'lenguages.max' => 'I linguaggi devono avare al massimo 100 caratteri',
+
+            'link.required' => 'Il link al progetto è obbligatorio',
+            'link.url' => 'Il link deve essere un url',
+            'link.max' => 'Il link deve avere al massimo 100 caratteri',
+        ]);
+
         $project = new Project;
         $project->fill($request->all());
         $project->slug = Project::generateSlug($project->title);
@@ -81,6 +100,24 @@ class ProjectController extends Controller
      */
     public function update(Request $request, Project $project)
     {
+        $request->validate([
+            'title' => 'required|string|max:50',
+            'lenguages' => 'required|string|max:100',
+            'link' => 'required|url|max:100',
+        ], 
+        [
+            'title.required' => 'Il titolo è obbligatorio',
+            'title.string' => 'Il titolo deve essere una stringa',
+            'title.max' => 'Il titolo deve avare al massimo 50 caratteri',
+
+            'lenguages.required' => 'Il progetto deve avere almeno un linguaggio',
+            'lenguages.string' => 'I linguaggi devono essere una stringa',
+            'lenguages.max' => 'I linguaggi devono avare al massimo 100 caratteri',
+
+            'link.required' => 'Il link al progetto è obbligatorio',
+            'link.url' => 'Il link deve essere un url',
+            'link.max' => 'Il link deve avere al massimo 100 caratteri',
+        ]);
         
         $project->fill($request->all());
         $project->slug = Project::generateSlug($project->title);
