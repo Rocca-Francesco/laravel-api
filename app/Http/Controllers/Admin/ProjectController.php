@@ -111,7 +111,9 @@ class ProjectController extends Controller
     public function edit(Project $project)
     {   
         $types = Type::orderBy('title')->get();
-        return view('admin.form', compact('project', 'types'));
+        $technologies = Technology::orderBy('title')->get();
+        $project_technologies = $project->technologies->pluck('id')->toArray();
+        return view('admin.form', compact('project', 'types', 'technologies', 'project_technologies'));
     }
 
     /**
@@ -159,6 +161,9 @@ class ProjectController extends Controller
         $project->slug = Project::generateSlug($project->title);
         $project->save();
 
+        if(Arr::exists($data, "technologies")) $post->technologies()->attach($data["technologies"]);
+        else $project->technologies()->detach();
+
         return to_route('admin.projects.show', compact('project'))
             ->with('message', 'Progetto modificato corretamente!');
     }
@@ -172,6 +177,7 @@ class ProjectController extends Controller
     public function destroy(Project $project)
     {
         if($project->link) Storage::delete($project->link);
+        $project->technologies()->detach();
         $project->delete();
         
         return to_route('admin.projects.index')
