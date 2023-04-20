@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Project;
 use App\Models\Type;
+use App\Models\Technology;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Storage;
@@ -35,7 +36,8 @@ class ProjectController extends Controller
     {   
         $project = new Project;
         $types = Type::orderBy('title')->get();
-        return view('admin.form', compact('project', 'types'));
+        $technologies = Technology::orderBy('title')->get();
+        return view('admin.form', compact('project', 'types', 'technologies'));
     }
 
     /**
@@ -51,6 +53,7 @@ class ProjectController extends Controller
             'lenguages' => 'required|string|max:100',
             'link' => 'nullable|image|mimes:jpg.png,jpeg',
             'type_id' => 'nullable|exists:types,id',
+            'technologies' => 'nullable|exists:technologies,id',
         ], 
         [
             'title.required' => 'Il titolo è obbligatorio',
@@ -66,6 +69,8 @@ class ProjectController extends Controller
             'link.mimes' => 'Il tipo d\'immagine deve essere jpg, png o jpeg',
 
             'type_id' => 'La tipologia deve essere tra i campi disponibili',
+
+            'technologies.exists' => 'Le tecnologie selezionate non esistono',
         ]);
 
         $data = $request->all();
@@ -79,6 +84,8 @@ class ProjectController extends Controller
         $project->fill($data);
         $project->slug = Project::generateSlug($project->title);
         $project->save();
+
+        if(Arr::exists($data, "technologies")) $post->technologies()->attach($data["technologies"]);
 
         return to_route('admin.projects.show', compact('project'))
             ->with('message', 'Progetto creato corretamente!');
@@ -120,7 +127,8 @@ class ProjectController extends Controller
             'title' => 'required|string|max:50',
             'lenguages' => 'required|string|max:100',
             'link' => 'nullable|image|mimes:jpg.png,jpeg',
-            'type_id' => 'nullable|exists:types,id'
+            'type_id' => 'nullable|exists:types,id',
+            'technologies' => 'nullable|exists:technologies,id',
         ], 
         [
             'title.required' => 'Il titolo è obbligatorio',
@@ -135,6 +143,8 @@ class ProjectController extends Controller
             'link.mimes' => 'Il tipo d\'immagine deve essere jpg, png o jpeg',
 
             'type_id' => 'La tipologia deve essere tra i campi disponibili',
+
+            'technologies.exists' => 'Le tecnologie selezionate non esistono',
         ]);
         
         $data = $request->all();

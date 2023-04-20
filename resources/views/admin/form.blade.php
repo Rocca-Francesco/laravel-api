@@ -71,8 +71,27 @@
         </div>
         @enderror
       </div>
-      <div class="col-2">
+      <div class="col-3">
         <img src="{{old('link', $project->getLinkUrl())}}" class="img-fluid" alt="" id="linkPreview">
+      </div>
+      <div class="col-6 mb-3">
+        <label class="form-label">Types of technologies</label>
+        <div class="form-check">
+            @foreach ($technologies as $technology)
+              <input
+                type="checkbox"
+                id="technology-{{ $technology->id }}"
+                value="{{ $technology->id }}"
+                name="technologies[]"
+                class="form-check-control"
+                @if (in_array($technology->id, old('technologies', $project_technologies ?? []))) checked @endif
+              >
+              <label for="tag-{{ $technology->id }}">
+                {{ $technology->title }}
+              </label>
+              <br>
+            @endforeach
+        </div>
       </div>
     </div>
     <input type="submit" class="btn btn-success" value="Save">
