@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\HomeController as AdminController;
 use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\Admin\TypeController;
+use App\Http\Controllers\Admin\TechnologyController;
 use App\Http\Controllers\Guest\HomeController as GuestController;
 use Illuminate\Support\Facades\Route;
 
@@ -30,6 +31,7 @@ Route::middleware('auth')
         Route::resource('projects', ProjectController::class)
             ->parameters(['projects' => 'project:slug']);
         Route::resource('type', TypeController::class);
+        Route::resource('technology', TechnologyController::class);
     });
 
 Route::middleware('auth')

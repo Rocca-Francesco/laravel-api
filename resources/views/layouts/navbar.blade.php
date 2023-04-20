@@ -24,6 +24,9 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('admin.type.index') }}">{{ __('Types') }}</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('admin.technology.index') }}">{{ __('Technologies') }}</a>
+                            </li>
 														{{-- <li class="nav-item">
                                 <a class="nav-link" href="{{ route('home') }}">{{ __('Home') }}</a>
                             </li>

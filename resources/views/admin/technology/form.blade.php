@@ -8,33 +8,33 @@
 @section('content')
 
 <div class="container">
-    @if($type->id)
+    @if($technology->id)
     <div class="d-flex justify-content-between align-items-center mt-4">
       <h2 class="fs-4 text-secondary">
-        Edit Type {{$type->title}}
+        Edit Technology {{$technology->title}}
       </h2>
       <div>
-        <a href="{{route('admin.type.index')}}" class="btn btn-primary">Torna alla lista</a>
-        <button type="submit" class="btn btn-danger my-2" data-bs-toggle="modal" data-bs-target="#destroyModal-{{$type->id}}"><i class="bi bi-trash3"></i></button>
+        <a href="{{route('admin.technology.index')}}" class="btn btn-primary">Torna alla lista</a>
+        <button type="submit" class="btn btn-danger my-2" data-bs-toggle="modal" data-bs-target="#destroyModal-{{$technology->id}}"><i class="bi bi-trash3"></i></button>
       </div>
     </div>
     @else
     <h2 class="fs-4 text-secondary">
-    Create new type
+    Create new technology
     </h2>
     @endif
 
-  @if($type->id)
-    <form action="{{route('admin.type.update', $type)}}" method="POST" enctype="multipart/form-data">
+  @if($technology->id)
+    <form action="{{route('admin.technology.update', $technology)}}" method="POST" enctype="multipart/form-data">
     @method('PUT')
   @else
-    <form action="{{route('admin.type.store')}}" method="POST" enctype="multipart/form-data">
+    <form action="{{route('admin.technology.store')}}" method="POST" enctype="multipart/form-data">
   @endif
   @csrf
     <div class="row">
       <div class="col-6 mb-3">
-        <label for="title" class="form-label">Type Title</label>
-        <input type="text" class="form-control @error('title') is-invalid @enderror" id="title" name="title" value="{{old('title', $type->title)}}">
+        <label for="title" class="form-label">Technology Title</label>
+        <input type="text" class="form-control @error('title') is-invalid @enderror" id="title" name="title" value="{{old('title', $technology->title)}}">
         @error('title')
         <div class="invalid-feedback">
           {{ $message }}
@@ -43,7 +43,7 @@
       </div>
       <div class="col-6 mb-3">
         <label for="color" class="form-label">Color</label>
-        <input type="color" class="form-control @error('color') is-invalid @enderror" id="color" name="color" value="{{old('color', $type->color)}}">
+        <input type="color" class="form-control @error('color') is-invalid @enderror" id="color" name="color" value="{{old('color', $technology->color)}}">
         @error('color')
         <div class="invalid-feedback">
           {{ $message }}
