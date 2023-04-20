@@ -15,6 +15,10 @@ class Project extends Model
         return $this->belongsTo(Type::class);
     }
 
+    public function technologies() {
+        return $this->belongsToMany(Technology::class);
+    }
+
     public static function generateSlug($title) {
         $possible_slug = Str::of($title)->slug('-');
         $projects = Project::where('slug', $possible_slug)->get();
