@@ -33,6 +33,9 @@
 						<th>
 							TIPI
 						</th>
+						<th>
+							TECNOLOGIE
+						</th>
 						<th scope="col"><a href="{{ route('admin.projects.index') }}?sort=lenguages @if ($sort == 'lenguages' && $order != 'DESC') DESC @else ASC @endif ">
 							LINGUAGGI
 							@if($sort == 'lenguages')
@@ -48,6 +51,13 @@
 							<th scope="row">{{$project->id}}</th>
 							<td>{{$project->title}}</td>
 							<td><span class="badge rounded-pill" style="background-color: {{$project->type?->color}}">{{$project->type?->title}}</span></td>
+							<td>
+								@forelse($project->technologies as $technology)
+									<span class="badge rounded-pill" style="background-color: {{$technology->color}}">{{$technology->title}}</span>
+								@empty
+									-
+								@endforelse
+							</td>
 							<td>{{$project->lenguages}}</td>
 							<td>
 								<a href="{{route('admin.projects.show', $project)}}" class="btn btn-primary my-2"><i class="bi bi-eye"></i></a>
