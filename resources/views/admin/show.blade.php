@@ -27,6 +27,14 @@
 								<h5 class="card-title">{{$project->title}}</h5>
 								<p>Tipi: 
 									<span class="badge rounded-pill" style="background-color: {{$project->type?->color}}">{{$project->type?->title}}</span> </p>
+								<p>
+									Tecnologie:
+									@forelse($project->technologies as $technology)
+									<span class="badge rounded-pill" style="background-color: {{$technology->color}}">{{$technology->title}}</span>
+									@empty
+										-
+									@endforelse
+								</p>
 								<p class="card-text">Programming Lenguages used: {{$project->lenguages}} </p>
 								<a href="{{$project->link}}" class="btn btn-primary">Go to project link</a>
 							</div>
