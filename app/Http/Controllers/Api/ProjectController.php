@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Models\Project;
+use App\Models\Type;
+use App\Models\Technology;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -14,7 +17,11 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        //
+        $projects = Project::where('id', '>=', 1)
+            ->with('type', 'technologies')
+            ->get();
+            // dd($projects);
+        return response()->json($projects);
     }
 
     /**
