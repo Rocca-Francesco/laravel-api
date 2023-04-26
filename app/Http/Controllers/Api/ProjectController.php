@@ -19,7 +19,7 @@ class ProjectController extends Controller
     {
         $projects = Project::where('id', '>=', 1)
             ->with('type', 'technologies')
-            ->get();
+            ->paginate(12);
             // dd($projects);
         return response()->json($projects);
     }
